@@ -1,0 +1,53 @@
+.form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 20px;
+  position: relative;
+  label {
+    color: #5e5873;
+  }
+  input[type="text"],
+  input[type="number"] {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 7px 15px 7px 15px;
+    outline: none;
+    width: 100%;
+    transition: all 0.2s;
+    &::placeholder {
+      color: #d9d9de;
+      margin-left: 20px;
+    }
+  }
+  input[type="password"] {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 7px 45px 7px 15px;
+    outline: none;
+    width: 100%;
+    transition: all 0.2s;
+    &::placeholder {
+      color: #d9d9de;
+      margin-left: 20px;
+    }
+  }
+  input[aria-invalid="true"] {
+    border: 1px solid #f90500;
+  }
+  input[aria-invalid="false"] {
+    border: 1px solid #d8d6de;
+  }
+  span {
+    color: #f90500;
+    font-size: 14px;
+  }
+  i {
+    position: absolute;
+    color: #92909c;
+    font-size: 20px;
+    top: 35px;
+    right: 10px;
+    cursor: pointer;
+  }
+}
