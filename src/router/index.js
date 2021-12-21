@@ -17,11 +17,7 @@ export const Router = () => {
           {routes.map(
             ({ path, auth = false, componentPath, children = [], name }) => {
               if (children.length === 0) {
-                const PageComponent = lazy(() =>
-                  import(
-                    /* webpackChunkName: "[request]" */ `../${componentPath}`
-                  )
-                );
+                const PageComponent = lazy(() => import(`../${componentPath}`));
                 return (
                   <Route
                     key={path}
@@ -37,9 +33,7 @@ export const Router = () => {
                 );
               } else {
                 const LayoutComponent = lazy(() =>
-                  import(
-                    /* webpackChunkName: "[request]" */ `../${componentPath}`
-                  )
+                  import(`../${componentPath}`)
                 );
                 return (
                   <Route
@@ -60,9 +54,7 @@ export const Router = () => {
                         auth: childAuth,
                       }) => {
                         const ChildComponent = lazy(() =>
-                          import(
-                            /* webpackChunkName: "[request]" */ `../${childComponentPath}`
-                          )
+                          import(`../${childComponentPath}`)
                         );
                         return (
                           <Route
