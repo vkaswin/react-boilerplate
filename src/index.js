@@ -13,9 +13,9 @@ const store = configureStore();
 
 const rootElement = document.getElementById("root");
 
-const root = createRoot(rootElement);
+const { render } = createRoot(rootElement);
 
-root.render(
+render(
   <StrictMode>
     <Provider store={store}>
       <ProvideAuth>
