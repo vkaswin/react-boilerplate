@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { configureStore } from "redux/store";
 import { ProvideAuth } from "hooks/useAuth";
@@ -11,15 +11,18 @@ import "bootstrap/dist/css/bootstrap.css";
 
 const store = configureStore();
 
-ReactDOM.render(
-  <React.StrictMode>
+const rootElement = document.getElementById("root");
+
+const root = createRoot(rootElement);
+
+root.render(
+  <StrictMode>
     <Provider store={store}>
       <ProvideAuth>
         <Router />
       </ProvideAuth>
     </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
