@@ -1,15 +1,16 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useCookies } from "./useCookies";
 import jwt_decode from "jwt-decode";
 
-const authContext = createContext();
+const AuthContext = createContext();
 
 export const ProvideAuth = ({ children }) => {
   const auth = useProvideAuth();
-  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
+  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => {
-  return useContext(authContext);
+  return useContext(AuthContext);
 };
 
 const useProvideAuth = () => {
@@ -17,17 +18,25 @@ const useProvideAuth = () => {
 
   let [isLoading, setIsLoading] = useState(true);
 
+  let { clearCookie, getCookie } = useCookies();
+
   useEffect(() => {
-    let token = localStorage.getItem("token");
+    let token = getCookie("authToken");
     if (token !== null) {
       setUser(jwt_decode(token));
     }
     setIsLoading(false);
   }, []);
 
+  const onLogout = () => {
+    clearCookie("authToken");
+    window.location.href = "/auth/sign-in";
+  };
+
   return {
     user,
     isLoading,
     setUser,
+    onLogout,
   };
 };

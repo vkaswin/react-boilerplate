@@ -1,4 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+body {
+  overflow-x: hidden;
+  min-height: 100vh;
+  cursor: default;
+}
+
 * {
   margin: 0px;
   padding: 0px;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+button {
+  &:disabled {
+    opacity: 0.8;
+  }
+}
+
+a {
+  text-decoration: none !important;
+  &:hover {
+    text-decoration: none;
+  }
 }

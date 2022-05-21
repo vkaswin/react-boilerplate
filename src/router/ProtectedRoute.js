@@ -1,12 +1,19 @@
 import React from "react";
 import { Navigate } from "react-router";
+import { useCookies } from "hooks";
 
-export const ProtectedRoute = ({ auth, component, name = false }) => {
-  let token = localStorage.getItem("token");
+export const ProtectedRoute = ({
+  isAuthenticated,
+  component,
+  isAuthPage = false,
+}) => {
+  const { getCookie } = useCookies();
 
-  if (auth && token === null) return <Navigate replace to="/" />;
+  const token = getCookie("authToken");
 
-  if (name && name === "AuthLayout" && token !== null)
+  if (isAuthenticated && token === null) return <Navigate replace to="/" />;
+
+  if (isAuthPage && token !== null)
     return <Navigate replace to="/admin/dashboard" />;
 
   return component;

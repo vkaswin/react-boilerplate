@@ -1,12 +1,11 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useAuth } from "hooks";
 import { routes } from "router/Routes";
 import { ProtectedRoute } from "./ProtectedRoute";
 const PageNotFound = lazy(() => import("../pages/404"));
 
-export const Router = () => {
-  const { user, isLoading } = useAuth();
+export const Router = (props) => {
+  const { user, isLoading } = props.auth;
 
   if (isLoading) return null;
 
@@ -15,7 +14,13 @@ export const Router = () => {
       <BrowserRouter>
         <Routes>
           {routes.map(
-            ({ path, auth = false, componentPath, children = [], name }) => {
+            ({
+              path,
+              componentPath,
+              children = [],
+              isAuthenticated = false,
+              isAuthPage = false,
+            }) => {
               if (children.length === 0) {
                 const PageComponent = lazy(() => import(`../${componentPath}`));
                 return (
@@ -24,9 +29,9 @@ export const Router = () => {
                     path={path}
                     element={
                       <ProtectedRoute
-                        auth={auth}
-                        name={name}
-                        component={<PageComponent />}
+                        isAuthenticated={isAuthenticated}
+                        isAuthPage={isAuthPage}
+                        component={<PageComponent {...props} />}
                       />
                     }
                   />
@@ -39,19 +44,14 @@ export const Router = () => {
                   <Route
                     key={path}
                     path={path}
-                    element={
-                      <ProtectedRoute
-                        auth={auth}
-                        name={name}
-                        component={<LayoutComponent />}
-                      />
-                    }
+                    element={<LayoutComponent {...props} />}
                   >
                     {children.map(
                       ({
                         path: childPath,
                         componentPath: childComponentPath,
-                        auth: childAuth,
+                        isAuthenticated: isChildAuthenticated,
+                        isAuthPage: isChildAuthPage,
                       }) => {
                         const ChildComponent = lazy(() =>
                           import(`../${childComponentPath}`)
@@ -62,8 +62,9 @@ export const Router = () => {
                             path={childPath}
                             element={
                               <ProtectedRoute
-                                auth={childAuth}
-                                component={<ChildComponent />}
+                                isAuthenticated={isChildAuthenticated}
+                                isAuthPage={isChildAuthPage}
+                                component={<ChildComponent {...props} />}
                               />
                             }
                           />
@@ -84,7 +85,7 @@ export const Router = () => {
               />
             }
           />
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="*" element={<PageNotFound {...props} />} />
         </Routes>
       </BrowserRouter>
     </Suspense>

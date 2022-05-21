@@ -1,0 +1,60 @@
+.authLayout {
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+  padding: 15px;
+  animation: fade-in 1s;
+  .auth-left {
+    width: 100%;
+    .auth-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: 20px;
+      span {
+        font-size: 24px;
+        color: #7367f0;
+        font-weight: 600;
+      }
+    }
+    .auth-img {
+      img {
+        padding: 0px 40px;
+        max-width: 100%;
+        height: 450px;
+      }
+    }
+  }
+  .auth-right {
+    width: 100%;
+    padding: 40px 60px 0px 60px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .authLayout {
+    .auth-left {
+      .auth-logo {
+        margin-left: 0px;
+        img {
+          width: 35px;
+          height: 40px;
+        }
+        span {
+          font-size: 24px;
+        }
+      }
+      .auth-img {
+        img {
+          padding: 0px;
+          max-width: 100%;
+          height: auto;
+        }
+      }
+    }
+    .auth-right {
+      width: 100%;
+      padding: 40px 0px 0px 0px;
+    }
+  }
+}

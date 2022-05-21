@@ -1,0 +1,61 @@
+.rc-toast-container {
+  position: fixed;
+  padding: 10px;
+  font-family: "Poppins", sans-serif;
+  max-height: 100%;
+  overflow-y: auto;
+  z-index: 1000;
+  --toast-success: #46d565;
+  --toast-error: #ff355b;
+  --toast-info: #3086eb;
+  --toast-warning: #fbc121;
+  --toast-theme-dark: #121212;
+  --toast-theme-light: #fff;
+  --toast-text-white: "white";
+  --toast-text-gray: #908f94;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.rc-toast-container[data-position^="top"] {
+  top: 0px;
+}
+
+.rc-toast-container[data-position^="bottom"] {
+  bottom: 0px;
+}
+
+.rc-toast-container[data-position$="center"] {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.rc-toast-container[data-position$="right"] {
+  right: 0px;
+  --animation-show: slide-in-right;
+  --animation-hide: slide-out-right;
+}
+
+.rc-toast-container[data-position$="left"] {
+  left: 0px;
+  --animation-show: slide-in-left;
+  --animation-hide: slide-out-left;
+}
+
+.rc-toast-container[data-position="bottom-center"] {
+  --animation-show: slide-in-top;
+  --animation-hide: slide-out-top;
+}
+
+.rc-toast-container[data-position="top-center"] {
+  --animation-show: slide-in-bottom;
+  --animation-hide: slide-out-bottom;
+}
+
+@media only screen and (max-width: 450px) {
+  .rc-toast-container[data-position$="center"] {
+    left: 0px;
+    transform: none;
+  }
+}
