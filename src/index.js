@@ -1,10 +1,9 @@
-import { Fragment, StrictMode, useEffect } from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { configureStore } from "redux/store";
 import { ProvideAuth } from "hooks/useAuth";
 import { Router } from "router";
-import { useAuth } from "hooks";
 import { ToastContainer } from "components";
 import reportWebVitals from "./reportWebVitals";
 
@@ -17,38 +16,19 @@ const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
 const App = () => {
-  const auth = useAuth();
-
-  const { onLogout } = auth;
-
-  useEffect(() => {
-    window.cookieStore.onchange = ({ deleted = [] }) => {
-      let isAuthToken =
-        deleted.find(({ name }) => name === "authToken") ?? false;
-      if (isAuthToken) {
-        onLogout();
-      }
-    };
-    return () => {
-      window.cookieStore.onchange = null;
-    };
-  }, []);
-
   return (
-    <Fragment>
-      <Router {...{ auth }} />
-      <ToastContainer />
-    </Fragment>
+    <Provider store={store}>
+      <ProvideAuth>
+        <Router />
+        <ToastContainer />
+      </ProvideAuth>
+    </Provider>
   );
 };
 
 root.render(
   <StrictMode>
-    <Provider store={store}>
-      <ProvideAuth>
-        <App />
-      </ProvideAuth>
-    </Provider>
+    <App />
   </StrictMode>
 );
 

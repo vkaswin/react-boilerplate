@@ -1,11 +1,12 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useAuth } from "hooks";
 import { routes } from "router/Routes";
 import { ProtectedRoute } from "./ProtectedRoute";
 const PageNotFound = lazy(() => import("../pages/404"));
 
-export const Router = (props) => {
-  const { user, isLoading } = props.auth;
+export const Router = () => {
+  const { user, isLoading } = useAuth();
 
   if (isLoading) return null;
 
@@ -31,7 +32,7 @@ export const Router = (props) => {
                       <ProtectedRoute
                         isAuthenticated={isAuthenticated}
                         isAuthPage={isAuthPage}
-                        component={<PageComponent {...props} />}
+                        component={<PageComponent />}
                       />
                     }
                   />
@@ -41,11 +42,7 @@ export const Router = (props) => {
                   import(`../${componentPath}`)
                 );
                 return (
-                  <Route
-                    key={path}
-                    path={path}
-                    element={<LayoutComponent {...props} />}
-                  >
+                  <Route key={path} path={path} element={<LayoutComponent />}>
                     {children.map(
                       ({
                         path: childPath,
@@ -64,7 +61,7 @@ export const Router = (props) => {
                               <ProtectedRoute
                                 isAuthenticated={isChildAuthenticated}
                                 isAuthPage={isChildAuthPage}
-                                component={<ChildComponent {...props} />}
+                                component={<ChildComponent />}
                               />
                             }
                           />
@@ -85,7 +82,7 @@ export const Router = (props) => {
               />
             }
           />
-          <Route path="*" element={<PageNotFound {...props} />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </Suspense>

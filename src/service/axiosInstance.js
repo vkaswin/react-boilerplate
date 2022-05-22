@@ -23,6 +23,7 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       clearCookie("authToken");
+      window.location.href = "/";
     }
     return Promise.reject(error.response);
   }
