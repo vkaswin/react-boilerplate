@@ -64,3 +64,16 @@ export const stringifyQuery = (query = {}) => {
     )
     .slice(0, -1);
 };
+
+//? Cookie change event
+// useEffect(() => {
+//   window.cookieStore.onchange = ({ deleted = [] }) => {
+//     let isAuthToken = deleted.find(({ name }) => name === "authToken") ?? false;
+//     if (isAuthToken) {
+//       onLogout();
+//     }
+//   };
+//   return () => {
+//     window.cookieStore.onchange = null;
+//   };
+// }, []);
