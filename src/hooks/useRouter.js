@@ -1,5 +1,5 @@
 import { useNavigate, useLocation, useParams } from "react-router-dom";
-import queryString from "query-string";
+import { parseQuery } from "utils";
 
 export const useRouter = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export const useRouter = () => {
     goBack: () => navigate(-1),
     pathName: location.pathname,
     query: {
-      ...queryString.parse(location.search),
+      ...parseQuery(location.search),
       ...params,
     },
   };

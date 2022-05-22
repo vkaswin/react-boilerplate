@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Input, PasswordInput, Button, CheckBox } from "components";
-import { useCookies, useRouter } from "hooks";
-import { toast } from "utils";
+import { useRouter } from "hooks";
+import { toast, getCookie, setCookie, clearCookie } from "utils";
 
 import "./SignIn.scss";
 
@@ -24,8 +24,6 @@ const SignIn = ({ auth: { setUser } }) => {
     formState: { errors },
     reset,
   } = useForm();
-
-  const { getCookie, setCookie, clearCookie } = useCookies();
 
   const router = useRouter();
 

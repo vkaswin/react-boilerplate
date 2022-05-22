@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useCookies } from "./useCookies";
+import { getCookie, clearCookie } from "utils";
 import jwt_decode from "jwt-decode";
 
 const AuthContext = createContext();
@@ -17,8 +17,6 @@ const useProvideAuth = () => {
   let [user, setUser] = useState(false);
 
   let [isLoading, setIsLoading] = useState(true);
-
-  let { clearCookie, getCookie } = useCookies();
 
   useEffect(() => {
     let token = getCookie("authToken");

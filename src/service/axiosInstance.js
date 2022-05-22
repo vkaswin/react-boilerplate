@@ -1,10 +1,11 @@
 import axios from "axios";
+import { clearCookie, getCookie } from "utils";
 
 export const axiosInstance = axios.create();
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = getCookie("authToken");
     if (token) {
       config.headers.Authorization = token;
     }
@@ -21,8 +22,7 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if (error.response.status === 401) {
-      localStorage.removeItem();
-      window.location.href = "/";
+      clearCookie("authToken");
     }
     return Promise.reject(error.response);
   }

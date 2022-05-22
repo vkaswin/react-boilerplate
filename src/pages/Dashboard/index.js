@@ -12,6 +12,7 @@ const Dashboard = ({
       <span>UserName : {name}</span>
       <br />
       <span>Email : {email}</span>
+      <br />
       <button onClick={onLogout}>Logout</button>
     </div>
   );
