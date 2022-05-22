@@ -9,7 +9,6 @@ import { ToastContainer } from "components";
 import reportWebVitals from "./reportWebVitals";
 
 import "assets/scss/index.scss";
-import "bootstrap/dist/css/bootstrap.css";
 
 const store = configureStore();
 

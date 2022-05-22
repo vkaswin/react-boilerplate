@@ -14,21 +14,6 @@
     cursor: pointer;
     margin-top: 5px;
     z-index: 2;
-    &::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      background-color: var(--checkbox-color);
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-    }
-    &:checked::before {
-      animation: checkbox-anime 0.3s ease;
-    }
-    // &:not(:checked) {
-    //   animation: checkbox-anime 0.3s ease;
-    // }
     &::after {
       content: "";
       position: absolute;
@@ -66,21 +51,5 @@
   }
   100% {
     transform: scale(1) rotate(45deg);
-  }
-}
-
-@keyframes checkbox-anime {
-  0% {
-    width: 0px;
-    height: 0px;
-    opacity: 0.2;
-  }
-  90% {
-    width: 35px;
-    height: 35px;
-    opacity: 0.2;
-  }
-  100% {
-    opacity: 0;
   }
 }
